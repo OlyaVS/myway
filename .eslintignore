@@ -1,0 +1,6 @@
+/.git
+.idea
+/dist
+/coverage
+/webpack
+node_modules
