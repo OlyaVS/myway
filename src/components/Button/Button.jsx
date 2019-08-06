@@ -4,7 +4,7 @@ import './button.scss';
 
 function Button(props) {
   return (
-    <button className={props.className + ` button`} type={props.type} title={props.type}>
+    <button className={`${props.className} button`} type={props.type} title={props.type}>
       {props.value}
     </button>
   );

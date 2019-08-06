@@ -5,7 +5,7 @@ import './header.scss';
 
 function Header(props) {
   return (
-    <header className={props.className + ` header`}>
+    <header className={`${props.className} header`}>
       <div className="header__box">
         <h1 className="header__title" data-testid="header__title">
           MyWay

@@ -2,39 +2,21 @@ import { hot } from 'react-hot-loader/root';
 import React from 'react';
 
 import Header from '../Header/Header.jsx';
-import Form from '../Form/Form';
-import RouteList from '../RouteList/RouteList';
-import Map from '../Map/Map';
+import FormContainer from '../../containers/FormContainer.js';
+import RouteListContainer from '../../containers/RouteListContainer';
+import MapContainer from '../../containers/MapContainer';
 
 import './app.scss';
-
-const route = [
-  {
-    id: 1565073526212,
-    address: `Россия, Омск, улица Ленина, 25`,
-    coords: [54.979077, 73.377932],
-  },
-  {
-    id: 1565073546091,
-    address: `Россия, Омск, улица Ленина, 5`,
-    coords: [54.986232, 73.374572],
-  },
-  {
-    id: 1565073558635,
-    address: `Россия, Омск, улица Дмитриева, 1/2`,
-    coords: [54.986599, 73.320727],
-  },
-];
 
 function App() {
   return (
     <main className="content">
       <div className="content__wrapper">
         <Header className="content__header" />
-        <Form className="content__address-form" />
-        <RouteList className="content__route-list" route={route} />
+        <FormContainer className="content__address-form" />
+        <RouteListContainer className="content__route-list" />
       </div>
-      <Map className="content__map" />
+      <MapContainer className="content__map" />
     </main>
   );
 }

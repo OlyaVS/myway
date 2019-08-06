@@ -13,7 +13,12 @@ function RouteList(props) {
       <SectionHeader className="route__title visually-hidden" title="Route" />
       <ul className="route__list">
         {routeList.map(item => (
-          <RouteListItem className="route__list-item" key={item.id} value={item.address} />
+          <RouteListItem
+            className="route__list-item"
+            key={item.id}
+            value={item.address}
+            onClick={props.handleDelete}
+          />
         ))}
       </ul>
     </section>
@@ -23,6 +28,8 @@ function RouteList(props) {
 RouteList.propTypes = {
   className: PropTypes.string.isRequired,
   route: PropTypes.arrayOf(PropTypes.object),
+  handleSort: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default RouteList;
