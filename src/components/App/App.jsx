@@ -29,9 +29,11 @@ const route = [
 function App() {
   return (
     <main className="content">
-      <Header className="content__header" />
-      <Form className="content__address-form" />
-      <RouteList className="content__route-list" route={route} />
+      <div className="content__wrapper">
+        <Header className="content__header" />
+        <Form className="content__address-form" />
+        <RouteList className="content__route-list" route={route} />
+      </div>
       <Map className="content__map" />
     </main>
   );

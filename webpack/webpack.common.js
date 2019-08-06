@@ -15,13 +15,6 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         exclude: [/node_modules/],
-        include: path.resolve(__dirname, 'src/static'),
-        use: 'file-loader',
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        exclude: [/node_modules/],
-        include: path.resolve(__dirname, 'src/fonts'),
         use: 'file-loader',
       },
     ],

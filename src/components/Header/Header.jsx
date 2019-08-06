@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './header.scss';
+
 function Header(props) {
   return (
     <header className={props.className + ` header`}>

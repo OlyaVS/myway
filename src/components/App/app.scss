@@ -40,3 +40,33 @@ img {
 a {
   text-decoration: none;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  background-color: #cbc2b9;
+
+  &__wrapper {
+    width: 100%;
+  }
+
+  &__map {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__wrapper {
+      width: 43%;
+    }
+
+    &__map {
+      width: 56%;
+    }
+  }
+}

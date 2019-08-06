@@ -1,0 +1,20 @@
+.map__container {
+  width: 100%;
+  height: 95vh;
+  min-height: 350px;
+  background-color: #f2f2f2;
+  border-radius: 15px;
+
+  &> ymaps {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  .map__container {
+    position: sticky;
+    top: 10px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  }
+}

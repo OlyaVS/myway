@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button.jsx';
 
+import './routeListItem.scss';
+
 function RouteListItem(props) {
   return (
     <li className={props.className + ` item`}>

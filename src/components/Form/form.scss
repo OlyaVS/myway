@@ -1,0 +1,32 @@
+.form {
+  margin-bottom: 20px;
+
+  &__body {
+    display: flex;
+    justify-content: stretch;
+  }
+
+  &__input {
+    flex-grow: 1;
+    min-height: 40px;
+    margin-right: 5px;
+  }
+
+  &__submit {
+    width: 50px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #009E8F;
+    background-color: #009E8F;
+
+    &:hover,
+    &:focus {
+      box-shadow: 1px 1px 5px 5px #ffffff;
+    }
+
+    &:active {
+      background-color: #f8de7e;
+      box-shadow: 1px 1px 5px 5px #ffffff;
+    }
+  }
+}

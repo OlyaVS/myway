@@ -1,0 +1,33 @@
+.input {
+  padding: 0 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 2px solid #b2a9a0;
+
+  &:hover {
+    border-color: #f8de7e;
+    box-shadow: 1px 1px 5px 5px #ffffff;
+  }
+
+  &:focus,
+  &:active {
+
+    &.error {
+      border-color: #ff7518;
+
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    font-size: 16px;
+    color: rgba(0,0,0,0.5);
+    opacity: 0.7;
+  }
+}
