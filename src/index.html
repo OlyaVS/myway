@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>New project</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="MyWay route planner provides directions to your destination."
+  />
+  <title>MyWay</title>
+  <script
+    src="https://api-maps.yandex.ru/2.1/?apikey=1e546859-b256-4cd5-958f-2441ff650a95&lang=ru_RU"
+    type="text/javascript"
+  ></script>
+  <script type="text/javascript">
+    ymaps.ready(init);
+    function init() {
+      const myMap = new ymaps.Map('map', { center: [55.76, 37.64], zoom: 7 });
+    }
+  </script>
+</head>
+<body>
+<div id="root"></div>
+</body>
 </html>
