@@ -27,13 +27,13 @@
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 47%;
       left: 10px;
       width: 20px;
       height: 2px;
-      background-color: #88807B;
+      background-color: #88807b;
     }
 
     &::before {
