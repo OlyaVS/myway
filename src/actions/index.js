@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
@@ -16,24 +17,35 @@ import {
   SORT_ITEMS__FAILURE,
 } from '../constants/actionTypes.js';
 
-export function fetchData() {
+function fetchDataRequest() {
   return {
     type: FETCH_DATA_REQUEST,
   };
 }
 
-export function fetchDataSuccess(data) {
+function fetchDataSuccess(data) {
   return {
     type: FETCH_DATA_SUCCESS,
     payload: data,
   };
 }
 
-export function fetchDataFailure() {
+function fetchDataFailure() {
   return {
     type: FETCH_DATA_FAILURE,
     payload: new Error(),
     error: true,
+  };
+}
+
+export function fetchData() {
+  return function(dispatch) {
+    dispatch(fetchDataRequest());
+    return axios
+      .get('/route')
+      .then(response => response.data)
+      .then(data => dispatch(fetchDataSuccess(data)))
+      .catch(() => dispatch(fetchDataFailure()));
   };
 }
 

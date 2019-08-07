@@ -3,9 +3,11 @@ import RouteList from '../components/RouteList/RouteList.jsx';
 
 import { deleteItem, sortItems } from '../actions/index';
 
-const mapStateToProps = state => ({
-  route: state.route,
-});
+const mapStateToProps = state => {
+  return {
+    route: state.route,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   handleSort: props => dispatch(sortItems(props)),

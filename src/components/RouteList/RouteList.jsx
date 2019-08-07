@@ -27,7 +27,7 @@ function RouteList(props) {
 
 RouteList.propTypes = {
   className: PropTypes.string.isRequired,
-  route: PropTypes.arrayOf(PropTypes.object),
+  route: PropTypes.array.isRequired,
   handleSort: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };

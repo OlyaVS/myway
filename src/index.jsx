@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import App from './components/App/App.jsx';
-import store from './store/index.js';
+import configureStore from './store/index.js';
+import { fetchData } from './actions';
+
+const store = configureStore({ route: [] });
+store.dispatch(fetchData());
 
 MODE === 'development'
   ? console.log(`welcome to development`)

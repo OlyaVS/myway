@@ -6,7 +6,8 @@
   "scripts": {
     "prettier": "prettier --config .prettierrc.json --write src/*.{js,jsx,scss,html}, src/**/*.{js,jsx,scss,html}",
     "lint": "eslint --fix src/ --ext js,jsx",
-    "start": "webpack-dev-server --config webpack/webpack.dev.js",
+    "server": "node server.js",
+    "start": "webpack-dev-server --open --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js",
     "test": "jest --coverage"
   },
@@ -29,13 +30,16 @@
   "homepage": "https://github.com/OlyaVS/webpack-babel-react-redux-jest-eslint-setup#readme",
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.6",
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
     "git-update": "^1.1.3",
     "npm": "^6.10.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

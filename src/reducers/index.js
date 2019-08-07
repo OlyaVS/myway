@@ -8,8 +8,9 @@ import {
 
 export default function reducer(state = { route: [] }, action) {
   switch (action.type) {
-    case FETCH_DATA_SUCCESS:
-      return { route: action.payload };
+    case FETCH_DATA_SUCCESS: {
+      return action.payload;
+    }
 
     case ADD_ITEM_SUCCESS:
       return { route: [...state.route, action.payload] };
