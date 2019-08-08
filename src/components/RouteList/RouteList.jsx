@@ -21,7 +21,7 @@ function RouteList(props) {
               className="route__list-item"
               key={item.id}
               value={item.address}
-              onClick={props.handleDelete}
+              handleDelete={props.handleDelete}
               handleSort={props.handleSort}
             />
           ))}

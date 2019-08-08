@@ -17,9 +17,9 @@ app
   .post(addItem);
 
 app
-  .route('/route/:id')
-  .patch(updateItem)
-  .delete(deleteItem);
+  .route('/route/:index')
+  .delete(deleteItem)
+  .patch(updateItem);
 
 function getData(request, response) {
   const state = JSON.parse(fs.readFileSync('./api/state.json'));
@@ -39,6 +39,22 @@ function sortItems(request, response) {
   state.route.splice(request.body.dragIndex, 1);
   state.route.splice(request.body.hoverIndex, 0, dragItem);
   updateStateFile(state);
+
+  response
+    .status(200)
+    .type('json')
+    .send(state.route)
+    .end();
+}
+
+function updateItem() {}
+
+function deleteItem(request, response) {
+  const state = JSON.parse(fs.readFileSync('./api/state.json'));
+  const index = request.params.index;
+  state.route.splice(index, 1);
+  updateStateFile(state);
+
   response
     .status(200)
     .type('json')
@@ -54,10 +70,6 @@ function updateStateFile(state) {
     }
   });
 }
-
-function updateItem() {}
-
-function deleteItem() {}
 
 function listening(error) {
   error ? console.log(error) : console.log(`Server is listening: http://localhost:${port}`);

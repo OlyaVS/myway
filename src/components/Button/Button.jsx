@@ -4,7 +4,12 @@ import './button.scss';
 
 function Button(props) {
   return (
-    <button className={`${props.className} button`} type={props.type} title={props.type}>
+    <button
+      className={`${props.className} button`}
+      type={props.type}
+      title={props.type}
+      onClick={props.onClick}
+    >
       {props.value}
     </button>
   );
@@ -15,6 +20,7 @@ Button.propTypes = {
   type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default Button;

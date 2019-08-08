@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   handleSort: (dragIndex, hoverIndex) => dispatch(sortItems(dragIndex, hoverIndex)),
-  handleDelete: id => dispatch(deleteItem(id)),
+  handleDelete: index => dispatch(deleteItem(index)),
 });
 
 const RouteListContainer = connect(

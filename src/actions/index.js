@@ -104,24 +104,35 @@ export function addItemFailure() {
   };
 }
 
-export function deleteItem() {
+function deleteItemRequest() {
   return {
     type: DELETE_ITEM_REQUEST,
   };
 }
 
-export function deleteItemSuccess(data) {
+function deleteItemSuccess(data) {
   return {
     type: DELETE_ITEM_SUCCESS,
     payload: data,
   };
 }
 
-export function deleteItemFailure() {
+function deleteItemFailure() {
   return {
     type: DELETE_ITEM_FAILURE,
     payload: new Error(),
     error: true,
+  };
+}
+
+export function deleteItem(index) {
+  return function(dispatch) {
+    dispatch(deleteItemRequest());
+    return axios
+      .delete(`./route/:${index}`)
+      .then(response => response.data)
+      .then(route => dispatch(deleteItemSuccess(route)))
+      .catch(() => dispatch(deleteItemFailure()));
   };
 }
 

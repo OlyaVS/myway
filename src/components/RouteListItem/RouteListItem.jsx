@@ -59,7 +59,7 @@ function RouteListItem(props) {
         type="button"
         title="delete"
         value="delete"
-        onClick={props.onClick}
+        onClick={() => props.handleDelete(props.index)}
       />
     </li>
   );
@@ -68,7 +68,7 @@ RouteListItem.propTypes = {
   index: PropTypes.number.isRequired,
   className: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
   handleSort: PropTypes.func.isRequired,
 };
 
