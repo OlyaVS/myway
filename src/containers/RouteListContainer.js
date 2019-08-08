@@ -10,7 +10,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  handleSort: props => dispatch(sortItems(props)),
+  handleSort: (dragIndex, hoverIndex) => dispatch(sortItems(dragIndex, hoverIndex)),
   handleDelete: id => dispatch(deleteItem(id)),
 });
 

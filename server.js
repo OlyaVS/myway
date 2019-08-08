@@ -6,8 +6,6 @@ const port = '3000';
 app.set('port', port);
 app.use(express.json(), express.urlencoded({ extended: true }));
 
-const state = JSON.parse(fs.readFileSync('./api/state.json'));
-
 app.get('/', (request, response) => {
   response.send('Hello, Server!');
 });
@@ -15,15 +13,17 @@ app.get('/', (request, response) => {
 app
   .route('/route')
   .get(getData)
-  .post(addItem)
-  .put(sortItems);
+  .put(sortItems)
+  .post(addItem);
 
 app
-  .route(`/route/:id`)
+  .route('/route/:id')
   .patch(updateItem)
   .delete(deleteItem);
 
 function getData(request, response) {
+  const state = JSON.parse(fs.readFileSync('./api/state.json'));
+
   response
     .status(200)
     .type('json')
@@ -33,7 +33,27 @@ function getData(request, response) {
 
 function addItem() {}
 
-function sortItems() {}
+function sortItems(request, response) {
+  const state = JSON.parse(fs.readFileSync('./api/state.json'));
+  const dragItem = state.route[request.body.dragIndex];
+  state.route.splice(request.body.dragIndex, 1);
+  state.route.splice(request.body.hoverIndex, 0, dragItem);
+  updateStateFile(state);
+  response
+    .status(200)
+    .type('json')
+    .send(state.route)
+    .end();
+}
+
+function updateStateFile(state) {
+  const data = JSON.stringify(state, null, 2);
+  fs.writeFile('./api/state.json', data, error => {
+    if (error) {
+      console.log(error);
+    }
+  });
+}
 
 function updateItem() {}
 

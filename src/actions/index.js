@@ -45,11 +45,45 @@ export function fetchData() {
       .get('/route')
       .then(response => response.data)
       .then(data => dispatch(fetchDataSuccess(data)))
-      .catch(() => dispatch(fetchDataFailure()));
+      .catch(dispatch(fetchDataFailure()));
   };
 }
 
-export function addItem() {
+function sortItemsRequest() {
+  return {
+    type: SORT_ITEMS_REQUEST,
+  };
+}
+
+function sortItemsSuccess(route) {
+  return {
+    type: SORT_ITEMS__SUCCESS,
+    payload: route,
+  };
+}
+
+function sortItemsFailure() {
+  return {
+    type: SORT_ITEMS__FAILURE,
+    payload: new Error(),
+    error: true,
+  };
+}
+
+export function sortItems(dragIndex, hoverIndex) {
+  return function(dispatch) {
+    dispatch(sortItemsRequest());
+    return axios
+      .put('/route', { dragIndex, hoverIndex })
+      .then(response => response.data)
+      .then(route => dispatch(sortItemsSuccess(route)))
+      .catch(() => dispatch(sortItemsFailure()));
+  };
+}
+
+export function addItem(address) {
+  console.log(address);
+
   return {
     type: ADD_ITEM_REQUEST,
   };
@@ -107,27 +141,6 @@ export function dragItemSuccess(data) {
 export function dragItemFailure() {
   return {
     type: DRAG_ITEM_FAILURE,
-    payload: new Error(),
-    error: true,
-  };
-}
-
-export function sortItems() {
-  return {
-    type: SORT_ITEMS_REQUEST,
-  };
-}
-
-export function sortItemsSuccess(data) {
-  return {
-    type: SORT_ITEMS__SUCCESS,
-    payload: data,
-  };
-}
-
-export function sortItemsFailure() {
-  return {
-    type: SORT_ITEMS__FAILURE,
     payload: new Error(),
     error: true,
   };

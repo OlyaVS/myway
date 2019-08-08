@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DndProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import RouteListItem from '../RouteListItem/RouteListItem.jsx';
 import SectionHeader from '../SectionHeader/SectionHeader.jsx';
@@ -9,19 +11,23 @@ import './routeList.scss';
 function RouteList(props) {
   const routeList = props.route;
   return (
-    <section className={props.className + ` route`}>
-      <SectionHeader className="route__title visually-hidden" title="Route" />
-      <ul className="route__list">
-        {routeList.map(item => (
-          <RouteListItem
-            className="route__list-item"
-            key={item.id}
-            value={item.address}
-            onClick={props.handleDelete}
-          />
-        ))}
-      </ul>
-    </section>
+    <DndProvider backend={HTML5Backend}>
+      <section className={props.className + ` route`}>
+        <SectionHeader className="route__title visually-hidden" title="Route" />
+        <ul className="route__list">
+          {routeList.map((item, index) => (
+            <RouteListItem
+              index={index}
+              className="route__list-item"
+              key={item.id}
+              value={item.address}
+              onClick={props.handleDelete}
+              handleSort={props.handleSort}
+            />
+          ))}
+        </ul>
+      </section>
+    </DndProvider>
   );
 }
 
