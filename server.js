@@ -31,7 +31,22 @@ function getData(request, response) {
     .end();
 }
 
-function addItem() {}
+function addItem(request, response) {
+  const newItem = {
+    id: Date.now(),
+    address: request.body.address.fullAddress,
+    coords: request.body.address.coords,
+  };
+  const state = JSON.parse(fs.readFileSync('./api/state.json'));
+  state.route.push(newItem);
+  updateStateFile(state);
+
+  response
+    .status(200)
+    .type('json')
+    .send(state.route)
+    .end();
+}
 
 function sortItems(request, response) {
   const state = JSON.parse(fs.readFileSync('./api/state.json'));
@@ -51,7 +66,7 @@ function updateItem() {}
 
 function deleteItem(request, response) {
   const state = JSON.parse(fs.readFileSync('./api/state.json'));
-  const index = request.params.index;
+  const index = parseInt(request.params.index);
   state.route.splice(index, 1);
   updateStateFile(state);
 

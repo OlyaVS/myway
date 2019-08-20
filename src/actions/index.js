@@ -81,26 +81,35 @@ export function sortItems(dragIndex, hoverIndex) {
   };
 }
 
-export function addItem(address) {
-  console.log(address);
-
+function addItemRequest() {
   return {
     type: ADD_ITEM_REQUEST,
   };
 }
 
-export function addItemSuccess(item) {
+function addItemSuccess(route) {
   return {
     type: ADD_ITEM_SUCCESS,
-    payload: item,
+    payload: route,
   };
 }
 
-export function addItemFailure() {
+function addItemFailure() {
   return {
     type: ADD_ITEM_FAILURE,
     payload: new Error(),
     error: true,
+  };
+}
+
+export function addItem(address) {
+  return function(dispatch) {
+    dispatch(addItemRequest());
+    return axios
+      .post('/route', { address })
+      .then(response => response.data)
+      .then(route => dispatch(addItemSuccess(route)))
+      .catch(() => dispatch(addItemFailure()));
   };
 }
 
@@ -129,7 +138,7 @@ export function deleteItem(index) {
   return function(dispatch) {
     dispatch(deleteItemRequest());
     return axios
-      .delete(`./route/:${index}`)
+      .delete(`./route/${index}`)
       .then(response => response.data)
       .then(route => dispatch(deleteItemSuccess(route)))
       .catch(() => dispatch(deleteItemFailure()));

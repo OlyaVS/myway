@@ -1,33 +1,39 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './textInput.scss';
 
-function TextInput(props) {
-  const input = useRef();
+class TextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.input = React.createRef();
+  }
 
-  useEffect(() => {
-    input.current.focus();
-  }, []);
+  componentDidUpdate() {
+    this.input.current.focus();
+  }
 
-  return (
-    <React.Fragment>
-      <label className={`${props.classNameLabel} label`} htmlFor={props.id}>
-        {props.label}
-      </label>
-      <input
-        className={`${props.classNameInput} input`}
-        type="text"
-        id={props.id}
-        name={props.name}
-        placeholder={props.placeholder}
-        required={true}
-        value={props.value}
-        onChange={props.onChange}
-        ref={input}
-      />
-    </React.Fragment>
-  );
+  render() {
+    return (
+      <React.Fragment>
+        <label className={`${this.props.classNameLabel} label`} htmlFor={this.props.id}>
+          {this.props.label}
+        </label>
+        <input
+          className={`${this.props.classNameInput} input`}
+          type="text"
+          id={this.props.id}
+          name={this.props.name}
+          placeholder={this.props.placeholder}
+          value={this.props.value}
+          required={true}
+          onChange={this.props.onChange}
+          onInvalid={this.props.onInvalid}
+          ref={this.input}
+        />
+      </React.Fragment>
+    );
+  }
 }
 
 TextInput.propTypes = {
@@ -39,6 +45,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onInvalid: PropTypes.func.isRequired,
 };
 
 export default TextInput;

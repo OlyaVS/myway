@@ -13,7 +13,7 @@ export default function reducer(state = { route: [] }, action) {
     }
 
     case ADD_ITEM_SUCCESS:
-      return { route: [...state.route, action.payload] };
+      return { route: action.payload };
 
     case SORT_ITEMS__SUCCESS:
       return { route: action.payload };
