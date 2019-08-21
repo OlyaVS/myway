@@ -20,7 +20,7 @@ class TextInput extends React.Component {
           {this.props.label}
         </label>
         <input
-          className={`${this.props.classNameInput} input`}
+          className={`${this.props.classNameInput} input ${this.props.error ? `input--error` : ''}`}
           type="text"
           id={this.props.id}
           name={this.props.name}
@@ -39,6 +39,7 @@ class TextInput extends React.Component {
 TextInput.propTypes = {
   classNameLabel: PropTypes.string.isRequired,
   classNameInput: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

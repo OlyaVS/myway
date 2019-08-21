@@ -11,13 +11,7 @@
 
   &:focus,
   &:active {
-    &.error {
-      border-color: #ff7518;
-
-      &::placeholder {
-        color: rgba(0, 0, 0, 0.5);
-      }
-    }
+    border-color: #f8de7e;
   }
 
   &:disabled {
@@ -28,5 +22,13 @@
     font-size: 16px;
     color: rgba(0, 0, 0, 0.5);
     opacity: 0.7;
+  }
+
+  &--error {
+    &::placeholder {
+      color: #000000;
+      opacity: 1;
+      background-color: #ffff00;
+    }
   }
 }

@@ -16,16 +16,18 @@
     width: 50px;
     height: 40px;
     border-radius: 6px;
-    border: 1px solid #009e8f;
-    background-color: #009e8f;
+    border: 1px solid #a0c9e3;
+    background-color: #a0c9e3;
 
     &:hover,
     &:focus {
       box-shadow: 1px 1px 5px 5px #ffffff;
+      background-color: #64a7d1;
     }
 
     &:active {
       background-color: #f8de7e;
+      border-color: #f8de7e;
       box-shadow: 1px 1px 5px 5px #ffffff;
     }
   }

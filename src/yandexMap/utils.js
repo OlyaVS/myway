@@ -18,10 +18,13 @@ export const GEOCODE = {
   },
 
   COORDS(coords) {
-    return ymaps.geocode(coords).then(result => {
-      const fullAddress = result.geoObjects.get(0).properties.get('text');
-      const shortAddress = result.geoObjects.get(0).properties.get('name');
-      return { fullAddress, shortAddress };
-    });
+    return ymaps
+      .geocode(coords)
+      .then(result => {
+        const fullAddress = result.geoObjects.get(0).properties.get('text');
+        const shortAddress = result.geoObjects.get(0).properties.get('name');
+        return { fullAddress, shortAddress };
+      })
+      .catch(err => console.log(err));
   },
 };

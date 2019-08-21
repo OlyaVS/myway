@@ -8,31 +8,50 @@ import { GEOCODE } from '../../yandexMap/utils.js';
 
 import './form.scss';
 
+const PLACEHOLDER = {
+  default: `Enter address`,
+  errorGeocoding: `Not found. Try another address.`,
+  errorDefault: `Error. Please try again.`,
+};
+
+const CUSTOM_ERROR = {
+  default: `Please enter an address`,
+};
+
 function Form(props) {
-  let [address, setAddress] = useState('');
+  let [address, setAddress] = useState(``);
+  let [errorMessage, setErrorMessage] = useState(``);
   let input = useRef();
 
   const handleMissingValue = () => {
-    input.current.input.current.setCustomValidity('Please enter an address');
-    setAddress('');
+    input.current.input.current.setCustomValidity(CUSTOM_ERROR.default);
+    setAddress(``);
+    setErrorMessage(``);
   };
 
   const handleChange = () => {
     const inputValue = input.current.input.current.value;
+    const isValueOnlySpaces = inputValue.trim().length < 1;
     setAddress(inputValue);
-
-    if (inputValue.trim().length < 1) {
-      input.current.input.current.setCustomValidity('Please enter an address');
-    } else {
-      input.current.input.current.setCustomValidity('');
-    }
+    setErrorMessage(``);
+    isValueOnlySpaces
+      ? input.current.input.current.setCustomValidity(CUSTOM_ERROR.default)
+      : input.current.input.current.setCustomValidity(``);
   };
 
   const handleSubmit = async evt => {
     evt.preventDefault();
-    const geocodedAddress = await GEOCODE.ADDRESS(address);
-    props.handleSubmit(geocodedAddress);
-    setAddress('');
+    try {
+      const geocodedAddress = await GEOCODE.ADDRESS(address);
+      props.handleSubmit(geocodedAddress);
+      setAddress(``);
+      setErrorMessage(``);
+    } catch (error) {
+      setAddress(``);
+      error instanceof TypeError
+        ? setErrorMessage(PLACEHOLDER.errorGeocoding)
+        : setErrorMessage(PLACEHOLDER.errorDefault);
+    }
   };
 
   return (
@@ -42,10 +61,11 @@ function Form(props) {
         <TextInput
           classNameLabel="form__label visually-hidden"
           classNameInput="form__input"
+          error={errorMessage}
           id="address"
           name="address"
           label="address"
-          placeholder="Enter address"
+          placeholder={errorMessage ? errorMessage : PLACEHOLDER.default}
           value={address}
           onChange={handleChange}
           onInvalid={handleMissingValue}
