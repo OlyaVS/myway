@@ -1,40 +1,70 @@
 /* global ymaps */
-import { getLastItemCoords, getRouteInCoords } from './utils';
-import { ROUTE_OPTIONS } from './constants.js';
+import { getLastItemCoords, getRoutePointsInCoords, geocode } from './utils';
+import { OPTIONS } from './constants.js';
 
 export default class YandexMap {
-  init(route) {
+  init(routeList) {
     ymaps
       .ready()
-      .then(() => this.createInstances(route))
-      .then(() => this.addRoute(route))
+      .then(() => {
+        this.createMap(routeList);
+        const route = this.createRoute(routeList);
+        this.addRoute(route);
+        this.setMapCenter(routeList);
+      })
       .catch(error => console.log(error));
   }
 
-  createInstances(route) {
+  createMap(routeList) {
     this.map = new ymaps.Map('map', {
-      center: getLastItemCoords(route) || ROUTE_OPTIONS.defaultCenter,
-      zoom: 15,
+      center: getLastItemCoords(routeList) || OPTIONS.map.defaultCenter,
+      zoom: OPTIONS.map.zoom,
     });
-    this.balloonContentLayout = ymaps.templateLayoutFactory.createClass('{{ properties.request }}');
-    this.geoObjects = new ymaps.GeoObjectCollection(null);
+  }
+
+  createRoute(routeList) {
+    const multiRouteModel = new ymaps.multiRouter.MultiRouteModel(
+      getRoutePointsInCoords(routeList),
+      OPTIONS.multiRouteModel
+    );
+
+    const multiRoute = new ymaps.multiRouter.MultiRoute(multiRouteModel, OPTIONS.multiRoute);
+    this.addSuccessHandler(multiRoute);
+    return multiRoute;
   }
 
   addRoute(route) {
-    this.multiRouteModel = new ymaps.multiRouter.MultiRouteModel(
-      getRouteInCoords(route),
-      ROUTE_OPTIONS.multiRouteModel
+    this.map.geoObjects.add(route, 0);
+  }
+
+  addSuccessHandler(multiRoute) {
+    multiRoute.model.events.add('requestsuccess', () =>
+      this.setBalloonInfo(multiRoute.getWayPoints())
     );
-    this.multiRoute = new ymaps.multiRouter.MultiRoute(
-      this.multiRouteModel,
-      ROUTE_OPTIONS.multiRoute
-    );
-    this.map.geoObjects.add(this.multiRoute);
+  }
+
+  setBalloonInfo(waypointsCollection) {
+    const balloonContentLayout = ymaps.templateLayoutFactory.createClass('{{ properties.address}}');
+
+    waypointsCollection.each(point => {
+      ymaps.geoObject.addon.balloon.get(point);
+      point.options.set({
+        balloonContentLayout,
+      });
+      geocode(point.geometry.getCoordinates()).then(result => {
+        point.properties.set('address', result.fullAddress);
+      });
+    });
+  }
+
+  setMapCenter(route) {
     this.map.setCenter(getLastItemCoords(route));
   }
 
-  update(route) {
+  reset(routeList) {
     this.map.geoObjects.removeAll();
+    const route = this.createRoute(routeList);
     this.addRoute(route);
+    this.setMapCenter(routeList);
   }
 }

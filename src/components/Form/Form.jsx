@@ -4,7 +4,7 @@ import Button from '../Button/Button.jsx';
 import SectionHeader from '../SectionHeader/SectionHeader.jsx';
 import TextInput from '../TextInput/TextInput.jsx';
 import PropTypes from 'prop-types';
-import { GEOCODE } from '../../yandexMap/utils.js';
+import { geocode } from '../../yandexMap/utils.js';
 
 import './form.scss';
 
@@ -42,7 +42,7 @@ function Form(props) {
   const handleSubmit = async evt => {
     evt.preventDefault();
     try {
-      const geocodedAddress = await GEOCODE.ADDRESS(address);
+      const geocodedAddress = await geocode(address);
       props.handleSubmit(geocodedAddress);
       setAddress(``);
       setErrorMessage(``);

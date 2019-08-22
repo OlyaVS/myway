@@ -18,7 +18,7 @@ class Map extends React.Component {
       this.map = new YandexMap();
       this.map.init(this.props.route);
     } else {
-      this.map.update(this.props.route);
+      this.map.reset(this.props.route);
     }
   }
 
