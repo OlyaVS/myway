@@ -1,39 +1,19 @@
 import React from 'react';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import PropTypes from 'prop-types';
-import YandexMap from '../../yandexMap/YandexMap';
 import './map.scss';
+import MapContainer from '../../containers/MapContainer';
 
-class Map extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    //use componentDidUpdate to build map cause state uploades after fetch
-  }
-
-  componentDidUpdate() {
-    if (!this.map) {
-      this.map = new YandexMap();
-      this.map.init(this.props.route);
-    } else {
-      this.map.reset(this.props.route);
-    }
-  }
-
-  render() {
-    return (
-      <section className={this.props.className + ` map`}>
-        <SectionHeader className="map__title visually-hidden" title="Map" />
-        <div className="map__container" id="map"></div>
-      </section>
-    );
-  }
+function Map(props) {
+  return (
+    <section className={props.className + ` map`}>
+      <SectionHeader className="map__title visually-hidden" title="Map" />
+      <MapContainer />
+    </section>
+  );
 }
 
 Map.propTypes = {
-  route: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired,
 };
 

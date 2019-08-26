@@ -45,7 +45,7 @@ export function fetchData() {
       .get('/route')
       .then(response => response.data)
       .then(data => dispatch(fetchDataSuccess(data)))
-      .catch(dispatch(fetchDataFailure()));
+      .catch(() => dispatch(fetchDataFailure()));
   };
 }
 
@@ -138,30 +138,41 @@ export function deleteItem(index) {
   return function(dispatch) {
     dispatch(deleteItemRequest());
     return axios
-      .delete(`./route/${index}`)
+      .delete(`/route/${index}`)
       .then(response => response.data)
       .then(route => dispatch(deleteItemSuccess(route)))
       .catch(() => dispatch(deleteItemFailure()));
   };
 }
 
-export function dragItem() {
+function dragItemRequest() {
   return {
     type: DRAG_ITEM_REQUEST,
   };
 }
 
-export function dragItemSuccess(data) {
+function dragItemSuccess(data) {
   return {
     type: DRAG_ITEM_SUCCESS,
     payload: data,
   };
 }
 
-export function dragItemFailure() {
+function dragItemFailure() {
   return {
     type: DRAG_ITEM_FAILURE,
     payload: new Error(),
     error: true,
+  };
+}
+
+export function dragItem(index, data) {
+  return dispatch => {
+    dispatch(dragItemRequest());
+    return axios
+      .patch(`/route/${index}`, { data })
+      .then(response => response.data)
+      .then(route => dispatch(dragItemSuccess(route)))
+      .catch(() => dispatch(dragItemFailure()));
   };
 }

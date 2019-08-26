@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Map from '../components/Map/map.jsx';
+import MapYandex from '../components/MapYandex/MapYandex';
 
 import { dragItem } from '../actions/index';
 
@@ -10,12 +10,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  handleDrag: id => dispatch(dragItem(id)),
+  handleDrag: (index, data) => dispatch(dragItem(index, data)),
 });
 
 const MapContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Map);
+)(MapYandex);
 
 export default MapContainer;

@@ -4,7 +4,7 @@ import React from 'react';
 import Header from '../Header/Header.jsx';
 import FormContainer from '../../containers/FormContainer.js';
 import RouteListContainer from '../../containers/RouteListContainer';
-import MapContainer from '../../containers/MapContainer';
+import Map from '../Map/Map';
 
 import './app.scss';
 
@@ -16,7 +16,7 @@ function App() {
         <FormContainer className="content__address-form" />
         <RouteListContainer className="content__route-list" />
       </div>
-      <MapContainer className="content__map" />
+      <Map className="content__map" />
     </main>
   );
 }

@@ -4,7 +4,7 @@ import Button from '../Button/Button.jsx';
 import SectionHeader from '../SectionHeader/SectionHeader.jsx';
 import TextInput from '../TextInput/TextInput.jsx';
 import PropTypes from 'prop-types';
-import { geocode } from '../../yandexMap/utils.js';
+import { geocode } from '../MapYandex/utils.js';
 
 import './form.scss';
 
