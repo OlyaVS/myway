@@ -117,7 +117,7 @@ describe('test async action creators', () => {
     expect(receivedResponse.payload).toEqual(errorText);
   });
 
-  test('creates SORT_ITEMS__SUCCESS when route been sorted using drag and drop route list', async () => {
+  test('creates SORT_ITEMS_SUCCESS when route been sorted using drag and drop route list', async () => {
     const mockedResponse = {
       data: {
         route: [
@@ -137,7 +137,7 @@ describe('test async action creators', () => {
     axios.put.mockResolvedValueOnce(mockedResponse);
     const expectedActions = [
       { type: types.SORT_ITEMS_REQUEST },
-      { type: types.SORT_ITEMS__SUCCESS, payload: mockedResponse.data },
+      { type: types.SORT_ITEMS_SUCCESS, payload: mockedResponse.data },
     ];
     const store = mockStore({
       route: [
@@ -160,11 +160,11 @@ describe('test async action creators', () => {
     expect(receivedResponse.payload).toEqual(mockedResponse.data);
   });
 
-  test('creates SORT_ITEMS__FAILURE when new route item has not been added to the route', async () => {
+  test('creates SORT_ITEMS_FAILURE when new route item has not been added to the route', async () => {
     const errorText = 'Server Error';
     const expectedActions = [
       { type: types.SORT_ITEMS_REQUEST },
-      { type: types.SORT_ITEMS__FAILURE, payload: errorText },
+      { type: types.SORT_ITEMS_FAILURE, payload: errorText },
     ];
     axios.put.mockRejectedValueOnce(new Error(errorText));
     const store = mockStore({ route: [] });

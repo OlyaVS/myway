@@ -3,7 +3,7 @@ import {
   ADD_ITEM_SUCCESS,
   DELETE_ITEM_SUCCESS,
   DRAG_ITEM_SUCCESS,
-  SORT_ITEMS__SUCCESS,
+  SORT_ITEMS_SUCCESS,
 } from '../constants/actionTypes.js';
 import { FETCH_DATA_FAILURE } from '../constants/actionTypes';
 
@@ -20,7 +20,7 @@ export default function reducer(state = { route: [] }, action) {
     case ADD_ITEM_SUCCESS:
       return { route: action.payload };
 
-    case SORT_ITEMS__SUCCESS:
+    case SORT_ITEMS_SUCCESS:
       return { route: action.payload };
 
     case DRAG_ITEM_SUCCESS:

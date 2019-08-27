@@ -13,8 +13,8 @@ import {
   DRAG_ITEM_SUCCESS,
   DRAG_ITEM_FAILURE,
   SORT_ITEMS_REQUEST,
-  SORT_ITEMS__SUCCESS,
-  SORT_ITEMS__FAILURE,
+  SORT_ITEMS_SUCCESS,
+  SORT_ITEMS_FAILURE,
 } from '../constants/actionTypes.js';
 
 function fetchDataRequest() {
@@ -87,14 +87,14 @@ function sortItemsRequest() {
 
 function sortItemsSuccess(route) {
   return {
-    type: SORT_ITEMS__SUCCESS,
+    type: SORT_ITEMS_SUCCESS,
     payload: route,
   };
 }
 
 function sortItemsFailure(text) {
   return {
-    type: SORT_ITEMS__FAILURE,
+    type: SORT_ITEMS_FAILURE,
     payload: text,
   };
 }
