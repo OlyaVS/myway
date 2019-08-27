@@ -5,11 +5,16 @@ import {
   DRAG_ITEM_SUCCESS,
   SORT_ITEMS__SUCCESS,
 } from '../constants/actionTypes.js';
+import { FETCH_DATA_FAILURE } from '../constants/actionTypes';
 
 export default function reducer(state = { route: [] }, action) {
   switch (action.type) {
     case FETCH_DATA_SUCCESS: {
       return action.payload;
+    }
+
+    case FETCH_DATA_FAILURE: {
+      return { route: [] };
     }
 
     case ADD_ITEM_SUCCESS:

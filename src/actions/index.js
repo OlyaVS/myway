@@ -30,11 +30,10 @@ function fetchDataSuccess(data) {
   };
 }
 
-function fetchDataFailure() {
+function fetchDataFailure(text) {
   return {
     type: FETCH_DATA_FAILURE,
-    payload: new Error(),
-    error: true,
+    payload: text,
   };
 }
 
@@ -45,39 +44,7 @@ export function fetchData() {
       .get('/route')
       .then(response => response.data)
       .then(data => dispatch(fetchDataSuccess(data)))
-      .catch(() => dispatch(fetchDataFailure()));
-  };
-}
-
-function sortItemsRequest() {
-  return {
-    type: SORT_ITEMS_REQUEST,
-  };
-}
-
-function sortItemsSuccess(route) {
-  return {
-    type: SORT_ITEMS__SUCCESS,
-    payload: route,
-  };
-}
-
-function sortItemsFailure() {
-  return {
-    type: SORT_ITEMS__FAILURE,
-    payload: new Error(),
-    error: true,
-  };
-}
-
-export function sortItems(dragIndex, hoverIndex) {
-  return function(dispatch) {
-    dispatch(sortItemsRequest());
-    return axios
-      .put('/route', { dragIndex, hoverIndex })
-      .then(response => response.data)
-      .then(route => dispatch(sortItemsSuccess(route)))
-      .catch(() => dispatch(sortItemsFailure()));
+      .catch(error => dispatch(fetchDataFailure(error.message)));
   };
 }
 
@@ -94,11 +61,10 @@ function addItemSuccess(route) {
   };
 }
 
-function addItemFailure() {
+function addItemFailure(text) {
   return {
     type: ADD_ITEM_FAILURE,
-    payload: new Error(),
-    error: true,
+    payload: text,
   };
 }
 
@@ -109,7 +75,38 @@ export function addItem(address) {
       .post('/route', { address })
       .then(response => response.data)
       .then(route => dispatch(addItemSuccess(route)))
-      .catch(() => dispatch(addItemFailure()));
+      .catch(error => dispatch(addItemFailure(error.message)));
+  };
+}
+
+function sortItemsRequest() {
+  return {
+    type: SORT_ITEMS_REQUEST,
+  };
+}
+
+function sortItemsSuccess(route) {
+  return {
+    type: SORT_ITEMS__SUCCESS,
+    payload: route,
+  };
+}
+
+function sortItemsFailure(text) {
+  return {
+    type: SORT_ITEMS__FAILURE,
+    payload: text,
+  };
+}
+
+export function sortItems(dragIndex, hoverIndex) {
+  return function(dispatch) {
+    dispatch(sortItemsRequest());
+    return axios
+      .put('/route', { dragIndex, hoverIndex })
+      .then(response => response.data)
+      .then(route => dispatch(sortItemsSuccess(route)))
+      .catch(error => dispatch(sortItemsFailure(error.message)));
   };
 }
 
@@ -126,11 +123,10 @@ function deleteItemSuccess(data) {
   };
 }
 
-function deleteItemFailure() {
+function deleteItemFailure(text) {
   return {
     type: DELETE_ITEM_FAILURE,
-    payload: new Error(),
-    error: true,
+    payload: text,
   };
 }
 
@@ -141,7 +137,7 @@ export function deleteItem(index) {
       .delete(`/route/${index}`)
       .then(response => response.data)
       .then(route => dispatch(deleteItemSuccess(route)))
-      .catch(() => dispatch(deleteItemFailure()));
+      .catch(error => dispatch(deleteItemFailure(error.message)));
   };
 }
 
@@ -158,11 +154,10 @@ function dragItemSuccess(data) {
   };
 }
 
-function dragItemFailure() {
+function dragItemFailure(text) {
   return {
     type: DRAG_ITEM_FAILURE,
-    payload: new Error(),
-    error: true,
+    payload: text,
   };
 }
 
@@ -173,6 +168,6 @@ export function dragItem(index, data) {
       .patch(`/route/${index}`, { data })
       .then(response => response.data)
       .then(route => dispatch(dragItemSuccess(route)))
-      .catch(() => dispatch(dragItemFailure()));
+      .catch(error => dispatch(dragItemFailure(error.message)));
   };
 }

@@ -10,6 +10,7 @@ class MapYandex extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log(this.map);
     if (!this.map) {
       this.init();
     } else {
@@ -20,11 +21,13 @@ class MapYandex extends React.Component {
   init() {
     ymaps
       .ready()
+      .then(() => this.createMap())
       .then(() => {
-        this.createMap();
-        const route = this.createRoute();
-        this.addRoute(route);
-        this.setMapCenter();
+        if (this.props.route.length) {
+          const route = this.createRoute();
+          this.addRoute(route);
+          this.setMapCenter();
+        }
       })
       .catch(error => console.log(error));
   }
@@ -92,6 +95,7 @@ class MapYandex extends React.Component {
   }
 
   reset() {
+    console.log(this.props.route);
     this.map.geoObjects.removeAll();
     const route = this.createRoute();
     this.addRoute(route);
