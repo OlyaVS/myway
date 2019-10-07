@@ -3,14 +3,14 @@ import { getLastItemCoords, getRoutePointsInCoords, geocode } from './utils';
 import { OPTIONS } from './constants.js';
 import React from 'react';
 import PropTypes from 'prop-types';
+import './mapYandex.scss';
 
 class MapYandex extends React.Component {
   componentDidMount() {
-    //use componentDidUpdate to build map cause state uploades after fetch
+    //use componentDidUpdate to build map because state uploades after fetch
   }
 
   componentDidUpdate() {
-    console.log(this.map);
     if (!this.map) {
       this.init();
     } else {
@@ -95,11 +95,13 @@ class MapYandex extends React.Component {
   }
 
   reset() {
-    console.log(this.props.route);
     this.map.geoObjects.removeAll();
-    const route = this.createRoute();
-    this.addRoute(route);
-    this.setMapCenter();
+
+    if (this.props.route.length) {
+      const route = this.createRoute();
+      this.addRoute(route);
+      this.setMapCenter();
+    }
   }
 
   render() {

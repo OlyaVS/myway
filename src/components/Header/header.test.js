@@ -6,6 +6,5 @@ afterEach(cleanup);
 
 test('Header title exists in H1', () => {
   const { getByTestId } = render(<Header className="header" />);
-
   expect(getByTestId(`header__title`).tagName).toBe(`H1`);
 });

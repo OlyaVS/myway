@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 
 import Button from '../Button/Button.jsx';
-import SectionHeader from '../SectionHeader/SectionHeader.jsx';
 import TextInput from '../TextInput/TextInput.jsx';
 import PropTypes from 'prop-types';
 import { geocode } from '../MapYandex/utils.js';
@@ -18,67 +17,98 @@ const CUSTOM_ERROR = {
   default: `Please enter an address`,
 };
 
-function Form(props) {
-  let [address, setAddress] = useState(``);
-  let [errorMessage, setErrorMessage] = useState(``);
-  let input = useRef();
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      address: ``,
+      errorMessage: ``,
+    };
+    this.input = React.createRef();
+    this.handleMissingValue = this.handleMissingValue.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.setCustomValidityMessage = this.setCustomValidityMessage.bind(this);
+  }
 
-  const handleMissingValue = () => {
-    input.current.input.current.setCustomValidity(CUSTOM_ERROR.default);
-    setAddress(``);
-    setErrorMessage(``);
-  };
+  handleMissingValue() {
+    this.setCustomValidityMessage(CUSTOM_ERROR.default);
+    this.setState({
+      address: ``,
+      errorMessage: ``,
+    });
+  }
 
-  const handleChange = () => {
-    const inputValue = input.current.input.current.value;
+  handleChange() {
+    const inputValue = this.input.current.input.current.value;
+    this.setState({
+      address: inputValue,
+      errorMessage: ``,
+    });
     const isValueOnlySpaces = inputValue.trim().length < 1;
-    setAddress(inputValue);
-    setErrorMessage(``);
     isValueOnlySpaces
-      ? input.current.input.current.setCustomValidity(CUSTOM_ERROR.default)
-      : input.current.input.current.setCustomValidity(``);
-  };
+      ? this.setCustomValidityMessage(CUSTOM_ERROR.default)
+      : this.setCustomValidityMessage(``);
+  }
 
-  const handleSubmit = async evt => {
+  async handleSubmit(evt) {
     evt.preventDefault();
     try {
-      const geocodedAddress = await geocode(address);
-      props.handleSubmit(geocodedAddress);
-      setAddress(``);
-      setErrorMessage(``);
+      const geocodedAddress = await geocode(this.state.address);
+      this.props.handleSubmit(geocodedAddress);
+      this.setState({
+        address: ``,
+        errorMessage: ``,
+      });
     } catch (error) {
-      setAddress(``);
-      error instanceof TypeError
-        ? setErrorMessage(PLACEHOLDER.errorGeocoding)
-        : setErrorMessage(PLACEHOLDER.errorDefault);
+      this.setState({
+        address: ``,
+        errorMessage:
+          error instanceof TypeError ? PLACEHOLDER.errorGeocoding : PLACEHOLDER.errorDefault,
+      });
     }
-  };
+  }
 
-  return (
-    <section className={`${props.className} form`}>
-      <SectionHeader className="form__title visually-hidden" title="Address form" />
-      <form className="form__body" action="" method="post" onSubmit={handleSubmit}>
+  setCustomValidityMessage(message) {
+    this.input.current.input.current.setCustomValidity(message);
+  }
+
+  render() {
+    return (
+      <form
+        className="form__body"
+        action=""
+        method="post"
+        onSubmit={this.handleSubmit}
+        data-testid="address-form"
+      >
         <TextInput
           classNameLabel="form__label visually-hidden"
           classNameInput="form__input"
-          error={errorMessage}
+          error={this.state.errorMessage}
           id="address"
           name="address"
           label="address"
-          placeholder={errorMessage ? errorMessage : PLACEHOLDER.default}
-          value={address}
-          onChange={handleChange}
-          onInvalid={handleMissingValue}
-          ref={input}
+          placeholder={this.state.errorMessage ? this.state.errorMessage : PLACEHOLDER.default}
+          value={this.state.address}
+          onChange={this.handleChange}
+          onInvalid={this.handleMissingValue}
+          ref={this.input}
+          data-testid="form__input"
         />
-        <Button className="form__submit" type="submit" title="submit" value="Add" />
+        <Button
+          className="form__submit"
+          type="submit"
+          title="submit"
+          value="Add"
+          data-testid="button"
+        />
       </form>
-    </section>
-  );
+    );
+  }
 }
 
 Form.propTypes = {
-  className: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 

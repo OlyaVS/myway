@@ -8,6 +8,9 @@ class TextInput extends React.Component {
     super(props);
     this.input = React.createRef();
   }
+  componentDidMount() {
+    this.input.current.focus();
+  }
 
   componentDidUpdate() {
     this.input.current.focus();
@@ -30,6 +33,7 @@ class TextInput extends React.Component {
           onChange={this.props.onChange}
           onInvalid={this.props.onInvalid}
           ref={this.input}
+          data-testid={'form__input'}
         />
       </React.Fragment>
     );
@@ -38,10 +42,10 @@ class TextInput extends React.Component {
 
 TextInput.propTypes = {
   classNameLabel: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   classNameInput: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

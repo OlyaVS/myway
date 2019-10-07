@@ -52,7 +52,11 @@ function RouteListItem(props) {
   drag(drop(ref));
 
   return (
-    <li className={`${props.className} item`} ref={ref} style={{ opacity }}>
+    <li
+      className={`${props.className} item`}
+      ref={ref}
+      style={{ opacity }}
+      data-testid="route__list-item">
       <p className="item__address">{props.value}</p>
       <Button
         className="item__delete"

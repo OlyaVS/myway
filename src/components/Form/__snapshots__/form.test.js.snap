@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`form testing renders form with input field and submit button 1`] = `
+<form
+  action=""
+  class="form__body"
+  data-testid="address-form"
+  method="post"
+>
+  <label
+    class="form__label visually-hidden label"
+    for="address"
+  >
+    address
+  </label>
+  <input
+    class="form__input input "
+    data-testid="form__input"
+    id="address"
+    name="address"
+    placeholder="Enter address"
+    required=""
+    type="text"
+    value=""
+  />
+  <button
+    class="form__submit button"
+    data-testid="button"
+    title="submit"
+    type="submit"
+  >
+    Add
+  </button>
+</form>
+`;

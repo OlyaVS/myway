@@ -1,10 +1,9 @@
 import React from 'react';
-import SectionHeader from '../SectionHeader/SectionHeader';
+import SectionHeader from './SectionHeader/SectionHeader';
 import PropTypes from 'prop-types';
-import './map.scss';
-import MapContainer from '../../containers/MapContainer';
+import MapContainer from '../../containers/MapContainer.js';
 
-function Map(props) {
+function MapSection(props) {
   return (
     <section className={props.className + ` map`}>
       <SectionHeader className="map__title visually-hidden" title="Map" />
@@ -13,8 +12,8 @@ function Map(props) {
   );
 }
 
-Map.propTypes = {
+MapSection.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-export default Map;
+export default MapSection;

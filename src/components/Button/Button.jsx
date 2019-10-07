@@ -9,6 +9,7 @@ function Button(props) {
       type={props.type}
       title={props.type}
       onClick={props.onClick}
+      data-testid={`button`}
     >
       {props.value}
     </button>
