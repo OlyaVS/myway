@@ -12,15 +12,17 @@ describe('route list test', () => {
     const handleSort = jest.fn();
     const address = 'Россия, Омск, улица Ленина, 25';
 
-    const { getByTestId } = render(<DndProvider backend={HTML5Backend}>
-      <RouteListItem
-        index={1}
-        className={'route__list-item'}
-        value={address}
-        handleDelete={handleDelete}
-        handleSort={handleSort}
-      />
-    </DndProvider>);
+    const { getByTestId } = render(
+      <DndProvider backend={HTML5Backend}>
+        <RouteListItem
+          index={1}
+          className={'route__list-item'}
+          value={address}
+          handleDelete={handleDelete}
+          handleSort={handleSort}
+        />
+      </DndProvider>
+    );
 
     const routeItem = getByTestId('item__address');
     expect(routeItem.textContent).toEqual(address);
@@ -31,19 +33,20 @@ describe('route list test', () => {
     const handleSort = jest.fn();
     const address = 'Россия, Омск, улица Ленина, 25';
 
-    const { getByTestId } = render(<DndProvider backend={HTML5Backend}>
-      <RouteListItem
-        index={1}
-        className={'route__list-item'}
-        value={address}
-        handleDelete={handleDelete}
-        handleSort={handleSort}
-      />
-    </DndProvider>);
-
+    const { getByTestId } = render(
+      <DndProvider backend={HTML5Backend}>
+        <RouteListItem
+          index={1}
+          className={'route__list-item'}
+          value={address}
+          handleDelete={handleDelete}
+          handleSort={handleSort}
+        />
+      </DndProvider>
+    );
 
     const deleteButton = getByTestId('item__delete');
-    fireEvent.click(deleteButton)
+    fireEvent.click(deleteButton);
     expect(handleDelete).toHaveBeenCalledTimes(1);
   });
 });

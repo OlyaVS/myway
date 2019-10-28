@@ -4,6 +4,7 @@ import Button from './Button.jsx';
 
 describe('test button', () => {
   afterEach(cleanup);
+
   test('onClickHanlder called when button clicked', () => {
     const onClickHandler = jest.fn();
 
