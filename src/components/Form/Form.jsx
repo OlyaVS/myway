@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Button from '../Button/Button.jsx';
 import TextInput from '../TextInput/TextInput.jsx';
 import PropTypes from 'prop-types';
-import { geocode } from '../MapYandex/utils.js';
+import { geocode } from '../../yandexMap/utils.js';
 
 import './form.scss';
 
@@ -17,12 +17,13 @@ const CUSTOM_ERROR = {
   default: `Please enter an address`,
 };
 
-class Form extends React.Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: ``,
       errorMessage: ``,
+      disabled: false,
     };
     this.input = React.createRef();
     this.handleMissingValue = this.handleMissingValue.bind(this);
@@ -36,6 +37,7 @@ class Form extends React.Component {
     this.setState({
       address: ``,
       errorMessage: ``,
+      disabled: true,
     });
   }
 
@@ -53,6 +55,10 @@ class Form extends React.Component {
 
   async handleSubmit(evt) {
     evt.preventDefault();
+    this.setState({
+      disabled: true,
+    });
+
     try {
       const geocodedAddress = await geocode(this.state.address);
       this.props.handleSubmit(geocodedAddress);
@@ -67,6 +73,10 @@ class Form extends React.Component {
           error instanceof TypeError ? PLACEHOLDER.errorGeocoding : PLACEHOLDER.errorDefault,
       });
     }
+
+    this.setState({
+      disabled: false,
+    });
   }
 
   setCustomValidityMessage(message) {
@@ -99,9 +109,9 @@ class Form extends React.Component {
         <Button
           className="form__submit"
           type="submit"
-          title="submit"
-          value="Add"
-          data-testid="button"
+          value="Submit address"
+          testid="form__button"
+          disabled={this.state.disabled}
         />
       </form>
     );

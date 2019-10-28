@@ -1,25 +1,23 @@
+@import '../../style/themes.scss';
+
 .header {
   width: 300px;
   margin: 0 auto 20px;
   padding: 10px;
   border-radius: 10px;
-  background-image: url('./leather.png');
-  background-color: #f2f2f2;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  background-color: map-get($header, bg);
 
   &__box {
     padding: 20px 0 5px 0;
-    border: 2px dashed #aaa;
+    border: 2px dashed map-get($header, border);
     border-radius: 10px;
-    box-shadow: 0 0 0 1px #f5f5f5;
   }
 
   &__title {
     margin: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 60px;
-    color: rgba(0, 0, 0, 0.3);
-    text-shadow: 1px 1px 2px #fff;
+    color: map-get($header, title);
     text-align: center;
   }
 
@@ -28,15 +26,6 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;
     font-style: italic;
-    color: rgba(0, 0, 0, 0.3);
-    text-shadow: 1px 1px 2px #fff;
-  }
-}
-
-@media (min-width: 768px) {
-  .header {
-    &:hover {
-      box-shadow: 1px 1px 10px 10px #ffffff;
-    }
+    color: map-get($header, tagline);
   }
 }

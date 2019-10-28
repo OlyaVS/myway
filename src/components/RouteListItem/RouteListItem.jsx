@@ -43,6 +43,7 @@ function RouteListItem(props) {
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
+
       props.handleSort(dragIndex, hoverIndex);
       item.index = hoverIndex;
     },
@@ -56,14 +57,17 @@ function RouteListItem(props) {
       className={`${props.className} item`}
       ref={ref}
       style={{ opacity }}
-      data-testid="route__list-item">
-      <p className="item__address">{props.value}</p>
+      data-testid="route__list-item"
+    >
+      <p className="item__address" data-testid="item__address">
+        {props.value}
+      </p>
       <Button
         className="item__delete"
         type="button"
-        title="delete"
-        value="delete"
+        value="delete address"
         onClick={() => props.handleDelete(props.index)}
+        testid="item__delete"
       />
     </li>
   );

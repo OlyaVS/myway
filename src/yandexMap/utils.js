@@ -1,17 +1,17 @@
 /* global ymaps */
-export function getRoutePointsInCoords(route) {
+export function getRouteItemsInCoords(route) {
   return route.map(item => item.coords);
 }
 
 export function getLastItemCoords(route) {
-  const routeInCoords = route.map(item => item.coords);
-  return routeInCoords[routeInCoords.length - 1];
+  const lastItemIndex = route.length - 1;
+  return route[lastItemIndex].coords;
 }
 
 export function geocode(address) {
   return ymaps.geocode(address).then(result => {
-    const fullAddress = result.geoObjects.get(0).properties.get('text');
+    const address = result.geoObjects.get(0).properties.get('text');
     const coords = result.geoObjects.get(0).geometry.getCoordinates();
-    return { fullAddress, coords };
+    return { address, coords };
   });
 }

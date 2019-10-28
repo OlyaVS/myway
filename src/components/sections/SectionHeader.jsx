@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SectionHeader(props) {
+function SectionHeader({ className, title }) {
   return (
-    <h2 className={props.className} data-testid="section__title">
-      {props.title}
+    <h2 className={className} data-testid="section__title">
+      {title}
     </h2>
   );
 }

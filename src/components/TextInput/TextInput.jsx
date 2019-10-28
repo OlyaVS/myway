@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import './textInput.scss';
 
-class TextInput extends React.Component {
+class TextInput extends Component {
   constructor(props) {
     super(props);
     this.input = React.createRef();
   }
+
   componentDidMount() {
     this.input.current.focus();
   }
@@ -25,6 +26,7 @@ class TextInput extends React.Component {
         <input
           className={`${this.props.classNameInput} input ${this.props.error ? `input--error` : ''}`}
           type="text"
+          title="please enter address"
           id={this.props.id}
           name={this.props.name}
           placeholder={this.props.placeholder}
@@ -34,6 +36,7 @@ class TextInput extends React.Component {
           onInvalid={this.props.onInvalid}
           ref={this.input}
           data-testid={'form__input'}
+          autoFocus
         />
       </React.Fragment>
     );

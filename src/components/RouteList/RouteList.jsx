@@ -11,16 +11,18 @@ function RouteList(props) {
   return (
     <DndProvider backend={HTML5Backend}>
       <ul className="route__list" data-testid="route__list">
-        {routeList.map((item, index) => (
-          <RouteListItem
-            index={index}
-            className="route__list-item"
-            key={item.id}
-            value={item.address}
-            handleDelete={props.handleDelete}
-            handleSort={props.handleSort}
-          />
-        ))}
+        {routeList.length
+          ? routeList.map((item, index) => (
+              <RouteListItem
+                index={index}
+                className="route__list-item"
+                key={item.id}
+                value={item.address}
+                handleDelete={props.handleDelete}
+                handleSort={props.handleSort}
+              />
+            ))
+          : null}
       </ul>
     </DndProvider>
   );

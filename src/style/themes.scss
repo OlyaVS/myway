@@ -1,0 +1,45 @@
+$button: (
+  bg: #e0dede,
+);
+
+$error-panel: (
+  text: #ff0000,
+  bg: #ffff00,
+  close: #d0d0d0,
+  close-pseudo: #000000,
+);
+
+$form: (
+  submit: #abd3ed,
+  submit-pseudo: #88807b,
+  submit-hover: #a0c5de,
+  sumbit-active: #f8de7e,
+);
+
+$header: (
+  border: #a8a7a7,
+  bg: #f2f2f2,
+  title: #a8a7a7,
+  tagline: #a8a7a7,
+);
+
+$map: (
+  bg: #f2f2f2,
+);
+
+$route-list-item: (
+  bg: #f2f2f2,
+  delete-bg: #e0dede,
+  delete-pseudo: #88807b,
+  delete-hover: #bfbbbb,
+  delete-active: #f8de7e,
+);
+
+$text-input: (
+  border: #b2a9a0,
+  hover-border: #f8de7e,
+  focus-border: #f8de7e,
+  placeholder-text: rgba(0, 0, 0, 0.5),
+  error-placeholder-text: #000000,
+  error-placeholder-bg: #ffff00,
+);

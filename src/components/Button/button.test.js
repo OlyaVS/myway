@@ -13,6 +13,7 @@ describe('test button', () => {
         type={'submit'}
         title={'submit'}
         value={'submit'}
+        testid={'button'}
         onClick={onClickHandler}
       />
     );

@@ -7,9 +7,9 @@ function Button(props) {
     <button
       className={`${props.className} button`}
       type={props.type}
-      title={props.type}
       onClick={props.onClick}
-      data-testid={`button`}
+      data-testid={props.testid}
+      disabled={props.disabled}
     >
       {props.value}
     </button>
@@ -19,9 +19,10 @@ function Button(props) {
 Button.propTypes = {
   className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  testid: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default Button;

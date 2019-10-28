@@ -3,6 +3,7 @@ import React from 'react';
 
 import Header from '../Header/Header.jsx';
 import FormSection from '../sections/FormSection.jsx';
+import ErrorPanelContainer from '../../containers/ErrorPanelContainer.js';
 import RouteListSection from '../sections/RouteListSection.jsx';
 import MapSection from '../sections/MapSection.jsx';
 
@@ -13,6 +14,7 @@ function App() {
     <main className="content" data-testid={`content`}>
       <div className="content__wrapper">
         <Header className="content__header" />
+        <ErrorPanelContainer />
         <FormSection className="content__address-form" />
         <RouteListSection className="content__route-list" />
       </div>

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import './header.scss';
 
-function Header(props) {
+function Header({ className }) {
   return (
-    <header className={`${props.className} header`}>
+    <header className={`${className} header`}>
       <div className="header__box">
         <h1 className="header__title" data-testid="header__title">
           MyWay

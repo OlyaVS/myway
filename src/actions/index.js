@@ -1,4 +1,5 @@
 import axios from 'axios';
+import ERROR_MESSAGES from '../constants/errorMessages';
 import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
@@ -30,10 +31,10 @@ function fetchDataSuccess(data) {
   };
 }
 
-function fetchDataFailure(text) {
+function fetchDataFailure() {
   return {
     type: FETCH_DATA_FAILURE,
-    payload: text,
+    payload: ERROR_MESSAGES.fetchData,
   };
 }
 
@@ -44,7 +45,7 @@ export function fetchData() {
       .get('/route')
       .then(response => response.data)
       .then(data => dispatch(fetchDataSuccess(data)))
-      .catch(error => dispatch(fetchDataFailure(error.message)));
+      .catch(() => dispatch(fetchDataFailure()));
   };
 }
 
@@ -61,10 +62,10 @@ function addItemSuccess(route) {
   };
 }
 
-function addItemFailure(text) {
+function addItemFailure() {
   return {
     type: ADD_ITEM_FAILURE,
-    payload: text,
+    payload: ERROR_MESSAGES.addItem,
   };
 }
 
@@ -75,7 +76,7 @@ export function addItem(address) {
       .post('/route', { address })
       .then(response => response.data)
       .then(route => dispatch(addItemSuccess(route)))
-      .catch(error => dispatch(addItemFailure(error.message)));
+      .catch(() => dispatch(addItemFailure()));
   };
 }
 
@@ -92,10 +93,10 @@ function sortItemsSuccess(route) {
   };
 }
 
-function sortItemsFailure(text) {
+function sortItemsFailure() {
   return {
     type: SORT_ITEMS_FAILURE,
-    payload: text,
+    payload: ERROR_MESSAGES.sortItems,
   };
 }
 
@@ -106,7 +107,7 @@ export function sortItems(dragIndex, hoverIndex) {
       .put('/route', { dragIndex, hoverIndex })
       .then(response => response.data)
       .then(route => dispatch(sortItemsSuccess(route)))
-      .catch(error => dispatch(sortItemsFailure(error.message)));
+      .catch(() => dispatch(sortItemsFailure()));
   };
 }
 
@@ -123,10 +124,10 @@ function deleteItemSuccess(data) {
   };
 }
 
-function deleteItemFailure(text) {
+function deleteItemFailure() {
   return {
     type: DELETE_ITEM_FAILURE,
-    payload: text,
+    payload: ERROR_MESSAGES.deleteItem,
   };
 }
 
@@ -137,7 +138,7 @@ export function deleteItem(index) {
       .delete(`/route/${index}`)
       .then(response => response.data)
       .then(route => dispatch(deleteItemSuccess(route)))
-      .catch(error => dispatch(deleteItemFailure(error.message)));
+      .catch(() => dispatch(deleteItemFailure()));
   };
 }
 
@@ -154,10 +155,10 @@ function dragItemSuccess(data) {
   };
 }
 
-function dragItemFailure(text) {
+function dragItemFailure() {
   return {
     type: DRAG_ITEM_FAILURE,
-    payload: text,
+    payload: ERROR_MESSAGES.dragItem,
   };
 }
 
@@ -168,6 +169,6 @@ export function dragItem(index, data) {
       .patch(`/route/${index}`, { data })
       .then(response => response.data)
       .then(route => dispatch(dragItemSuccess(route)))
-      .catch(error => dispatch(dragItemFailure(error.message)));
+      .catch(() => dispatch(dragItemFailure()));
   };
 }

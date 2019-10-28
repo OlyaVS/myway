@@ -1,0 +1,16 @@
+@import '../../style/themes.scss';
+
+.map__container {
+  position: sticky;
+  top: 10px;
+  width: 100%;
+  height: 97vh;
+  min-height: 350px;
+  background-color: map-get($map, bg);
+  border-radius: 15px;
+
+  & > ymaps {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+}

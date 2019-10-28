@@ -20,16 +20,16 @@ exports[`form testing renders form with input field and submit button 1`] = `
     name="address"
     placeholder="Enter address"
     required=""
+    title="please enter address"
     type="text"
     value=""
   />
   <button
     class="form__submit button"
-    data-testid="button"
-    title="submit"
+    data-testid="form__button"
     type="submit"
   >
-    Add
+    Submit address
   </button>
 </form>
 `;

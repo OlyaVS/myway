@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionHeader from './SectionHeader/SectionHeader.jsx';
+import SectionHeader from './SectionHeader.jsx';
 import PropTypes from 'prop-types';
 import FormContainer from '../../containers/FormContainer.js';
 

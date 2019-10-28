@@ -12,7 +12,7 @@ describe('form testing', () => {
 
     const form = getByTestId('address-form');
     const input = getByTestId('form__input');
-    const submitButton = getByTestId('button');
+    const submitButton = getByTestId('form__button');
 
     expect(form).toBeTruthy();
     expect(form.tagName).toBe('FORM');
@@ -30,7 +30,7 @@ describe('form testing', () => {
 
     fireEvent.change(input, {
       target: {
-        value: 'Omsk',
+        value: 'O',
       },
     });
 
@@ -41,9 +41,8 @@ describe('form testing', () => {
   test('handleSubmit is called when form is submitted', () => {
     const handleChange = jest.spyOn(Form.prototype, 'handleChange');
     const handleSubmit = jest.spyOn(Form.prototype, 'handleSubmit');
-    const handleSubmitProp = jest.fn();
 
-    const { getByTestId } = render(<Form handleSubmit={handleSubmitProp} />);
+    const { getByTestId } = render(<Form handleSubmit={jest.fn()} />);
     const form = getByTestId('address-form');
     const input = getByTestId('form__input');
 

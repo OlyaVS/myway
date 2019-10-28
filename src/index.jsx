@@ -6,7 +6,7 @@ import App from './components/App/App.jsx';
 import configureStore from './store/index.js';
 import { fetchData } from './actions';
 
-const store = configureStore({ route: [] });
+const store = configureStore({ route: [], error: '' });
 store.dispatch(fetchData());
 
 MODE === 'development'

@@ -1,9 +1,10 @@
-.form {
-  margin-bottom: 20px;
+@import '../../style/themes.scss';
 
+.form {
   &__body {
     display: flex;
     justify-content: stretch;
+    align-items: center;
   }
 
   &__input {
@@ -13,22 +14,41 @@
   }
 
   &__submit {
+    position: relative;
     width: 50px;
     height: 40px;
+    font-size: 0;
     border-radius: 6px;
-    border: 1px solid #a0c9e3;
-    background-color: #a0c9e3;
+    border: 1px solid map-get($form, submit);
+    background-color: map-get($form, submit);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 17px;
+      left: 17px;
+      width: 15px;
+      height: 2px;
+      background-color: map-get($form, submit-pseudo);
+    }
+
+    &::before {
+      transform: rotate(90deg);
+    }
+
+    &::after {
+      transform: rotate(180deg);
+    }
 
     &:hover,
     &:focus {
-      box-shadow: 1px 1px 5px 5px #ffffff;
-      background-color: #64a7d1;
+      background-color: map-get($form, submit-hover);
     }
 
     &:active {
-      background-color: #f8de7e;
-      border-color: #f8de7e;
-      box-shadow: 1px 1px 5px 5px #ffffff;
+      background-color: map-get($form, submit-active);
+      border-color: map-get($form, submit-active);
     }
   }
 }

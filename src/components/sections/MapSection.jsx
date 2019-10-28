@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionHeader from './SectionHeader/SectionHeader';
+import SectionHeader from './SectionHeader.jsx';
 import PropTypes from 'prop-types';
 import MapContainer from '../../containers/MapContainer.js';
 

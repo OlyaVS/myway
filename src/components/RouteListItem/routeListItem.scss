@@ -1,11 +1,12 @@
+@import '../../style/themes.scss';
+
 .item {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: #ffffff;
+  background-color: map-get($route-list-item, bg);
   cursor: move;
-  border: 2px solid #b2a9a0;
   border-radius: 6px;
 
   &__address {
@@ -22,35 +23,26 @@
     border: 0;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-    background-color: #eeeae7;
+    background-color: map-get($route-list-item, delete-bg);
     cursor: pointer;
 
-    &::before,
-    &::after {
+    &::before {
       content: '';
       position: absolute;
       top: 47%;
       left: 10px;
       width: 20px;
       height: 2px;
-      background-color: #88807b;
-    }
-
-    &::before {
-      transform: rotate(45deg);
-    }
-
-    &::after {
-      transform: rotate(-45deg);
+      background-color: map-get($route-list-item, delete-pseudo);
     }
 
     &:hover,
     &:focus {
-      background-color: #ff7518;
+      background-color: map-get($route-list-item, delete-hover);
     }
 
     &:active {
-      background-color: #ff943a;
+      background-color: map-get($route-list-item, delete-active);
     }
   }
 }
