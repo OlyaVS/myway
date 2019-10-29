@@ -6,8 +6,8 @@ It communicates with API Yandex.Maps to build an efficient path on the map.
 # How to use
 
 1) Type in the address in the input filed.
-2) Press blue button at the right side near the input field to add an address.
-3) Repeat first two steps to specify the origin, waypoints, and destination.
+2) Press the blue button at the right side of the input field to add an address.
+3) Repeat the first two steps to specify the origin, waypoints, and destination.
 3) You will find each address added to the list below and the route path displayed on the map.
 
 # Features
