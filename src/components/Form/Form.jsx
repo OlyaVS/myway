@@ -37,7 +37,7 @@ class Form extends Component {
     this.setState({
       address: ``,
       errorMessage: ``,
-      disabled: true,
+      disabled: false,
     });
   }
 
